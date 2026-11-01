@@ -11,4 +11,7 @@ public class Nodo {
         this.sig = null;
         this.ant = null;
     }
+    public Nodo(){
+
+    }
 }
