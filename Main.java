@@ -53,6 +53,12 @@ public class Main {
                     break;
                 case 5:
                     //Eliminar
+                    System.out.println("Ingresa la letra que deseas eliminar:");
+                    char letraEliminar = sc.nextLine().charAt(0);
+                    System.out.println("Ingresa la prioridad (1 o 2):");
+                    int prioridadEliminar = sc.nextInt();
+                    sc.nextLine();
+                    Eliminar(lista, letraEliminar, prioridadEliminar);
                     break;
                 case 6:
                     //Modificar
@@ -130,7 +136,7 @@ public class Main {
         }
         System.out.println();
     } 
-
+    //Funcion para obtener la posicion de la letra en el orden AaBbCc..Zz(hecha por zoe)
     public static int posicionLetra(char letra) {
         if (letra >= 'A' && letra <= 'Z') {
             return (letra - 'A') * 2; //el espacio entre mayusculas
@@ -252,6 +258,27 @@ public class Main {
 
         System.out.println("Letra insertada correctamente");
     }
+    
+    public static void Eliminar(Lista lista, char letra, int prioridad) {
+        Nodo nodoAEliminar = Buscar(lista, letra, prioridad);
+        if (nodoAEliminar == null) {
+            System.out.println("La letra no se encuentra en la lista.");
+            return;
+        }
 
+        if (nodoAEliminar.ant != null) {
+            nodoAEliminar.ant.sig = nodoAEliminar.sig;// Actualizar el enlace
+        } else {
+            lista.P = nodoAEliminar.sig; // Actualizar P si es el primer nodo
+        }
+
+        if (nodoAEliminar.sig != null) {
+            nodoAEliminar.sig.ant = nodoAEliminar.ant;// Actualizar el enlace
+        } else {
+            lista.F = nodoAEliminar.ant; // Actualizar F si es el último nodo
+        }
+
+        System.out.println("Letra eliminada correctamente");
+    }
 
 }
