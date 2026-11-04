@@ -62,6 +62,12 @@ public class Main {
                     break;
                 case 6:
                     //Modificar
+                    System.out.println("Ingresa la letra que deseas modificar:");
+                    char letraModificar = sc.nextLine().charAt(0);
+                    System.out.println("Ingresa la prioridad (1 o 2):");
+                    int prioridadModificar = sc.nextInt();
+                    sc.nextLine();
+                    Modificar(lista, letraModificar, prioridadModificar);
                     break;
                 case 7:
                     //Creditos
@@ -279,6 +285,26 @@ public class Main {
         }
 
         System.out.println("Letra eliminada correctamente");
+    }
+
+    public static void Modificar(Lista lista, char letra, int prioridad) {
+        Nodo encontrado = Buscar(lista, letra, prioridad);
+
+        if (encontrado == null) {
+            System.out.println("La letra no se encuentra en la lista.");
+            return;
+        }
+        System.out.println("Ingresa la nueva letra:");
+        char nuevaLetra = sc.nextLine().charAt(0); //aca nose si se tanga que poner nueva prioridad o no lol
+        if (posicionLetra(nuevaLetra) == -1) {
+            System.out.println("Solo se permiten letras");
+            return;
+        }
+        int prioridadOriginal = encontrado.prioridad;
+        
+        Eliminar(lista, letra, prioridadOriginal);
+        Insertar(lista, nuevaLetra, prioridadOriginal);
+        System.out.println("Letra modificada correctamente");
     }
 
 }
