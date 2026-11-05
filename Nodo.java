@@ -4,7 +4,7 @@ public class Nodo {
 
     Nodo sig;
     Nodo ant;
-
+    
     public Nodo(char v, int prioridad) {
         this.info = v;
         this.prioridad = prioridad;
