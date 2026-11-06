@@ -14,7 +14,7 @@ public class Main {
             switch (opcion) {
                 case 1:
                     //Inicializar/Borrar lista
-                    lista.Inicializar(lista);
+                    lista.Inicializar();
                     System.out.println("La lista se Inicializo");
                     break;
                 case 2:
@@ -23,9 +23,9 @@ public class Main {
                     System.out.println("Ver la lista de P a F: (si)");
                     OpcMostrar = sc.nextLine().equalsIgnoreCase("si");
                     if (OpcMostrar) {
-                        lista.MostrarP(lista.P);
+                        lista.MostrarP();
                     }else{
-                        lista.MostrarF(lista.F);
+                        lista.MostrarF();
                     }
                     break;
                 case 3:
@@ -35,7 +35,7 @@ public class Main {
                     System.out.println("Ingresa la prioridad (1 o 2):");
                     int prioridad = sc.nextInt();
                     sc.nextLine();
-                    Nodo encontrado = lista.Buscar(lista, letra, prioridad);
+                    Nodo encontrado = lista.Buscar(letra, prioridad);
                     if (encontrado != null) {
                         System.out.println("La letra SI se encuentra en la lista.");
                     } else {
@@ -49,25 +49,38 @@ public class Main {
                     System.out.println("Ingresa la prioridad (1 o 2):");
                     int prioridadInsertar = sc.nextInt();
                     sc.nextLine();
-                    lista.Insertar(lista, letraInsertar, prioridadInsertar);
+                    lista.Insertar(letraInsertar, prioridadInsertar);
                     break;
                 case 5:
                     //Eliminar
-                    System.out.println("Ingresa la letra que deseas eliminar:");
-                    char letraEliminar = sc.nextLine().charAt(0);
                     System.out.println("Ingresa la prioridad (1 o 2):");
                     int prioridadEliminar = sc.nextInt();
-                    sc.nextLine();
-                    lista.Eliminar(lista, letraEliminar, prioridadEliminar);
+                    sc.nextLine(); // Consume el salto de línea
+
+                    if (prioridadEliminar == 1) {
+                        lista.EliminarPrimeroPrioridad1();
+                    } else if (prioridadEliminar == 2) {
+                        System.out.println("Ingresa la letra que deseas eliminar:");
+                        char letraEliminar = sc.nextLine().charAt(0);
+
+                        lista.Eliminar(letraEliminar, 2);
+                    } else {
+                        System.out.println("Prioridad no válida.");
+                    }
                     break;
                 case 6:
-                    //Modificar
+                    // Modificar
                     System.out.println("Ingresa la letra que deseas modificar:");
                     char letraModificar = sc.nextLine().charAt(0);
+
                     System.out.println("Ingresa la prioridad (1 o 2):");
                     int prioridadModificar = sc.nextInt();
-                    sc.nextLine();
-                    lista.Modificar(lista, letraModificar, prioridadModificar, sc);
+                    sc.nextLine(); // Consume el salto de línea pendiente
+
+                    System.out.println("Ingresa la nueva letra:");
+                    char nuevaLetra = sc.nextLine().charAt(0);
+
+                    lista.Modificar(letraModificar, prioridadModificar, nuevaLetra);
                     break;
                 case 7:
                     //Creditos
